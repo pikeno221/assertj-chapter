@@ -12,7 +12,5 @@ public class CarrinhoProdutoRequest {
 
     private Long idProduto;
 
-    private Integer quantidade;
-
 
 }

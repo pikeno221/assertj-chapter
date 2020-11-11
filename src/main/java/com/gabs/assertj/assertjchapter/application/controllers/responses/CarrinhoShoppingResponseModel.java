@@ -1,10 +1,6 @@
 package com.gabs.assertj.assertjchapter.application.controllers.responses;
 
-import com.gabs.assertj.assertjchapter.domain.produto.Produto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +9,11 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class CarrinhoShoppingResponseModel implements Serializable {
+
+    private static final long serialVersionUID = -5563711050951481762L;
 
     private List<ProdutoResponseModel> produtos;
 

@@ -2,7 +2,9 @@ package com.gabs.assertj.assertjchapter.domain.carrinho;
 
 import com.gabs.assertj.assertjchapter.application.controllers.converters.CarrinhoShoppingConverter;
 import com.gabs.assertj.assertjchapter.domain.CarrinhoShoppingMapper;
+import com.gabs.assertj.assertjchapter.domain.produto.Produto;
 import com.gabs.assertj.assertjchapter.infrastructure.repositories.CarrinhoShoppingRepository;
+import com.gabs.assertj.assertjchapter.infrastructure.repositories.ProdutoRepository;
 import lombok.AllArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ public class CarrinhoShoppingService {
 
     private final CarrinhoShoppingRepository repository;
 
+    private final ProdutoRepository produtoRepository;
+
     private final CarrinhoShoppingMapper mapper = Mappers.getMapper(CarrinhoShoppingMapper.class);
 
 
@@ -28,7 +32,9 @@ public class CarrinhoShoppingService {
 
             if (carrinhoShoppingOptional.isPresent()) {
 
-                CarrinhoShopping carrinhoShopping = carrinhoShoppingOptional.get().adicionarProduto(mapper.fromCarrinhoProdutoRequestToProduto(carrinhoProdutoRequest));
+                Produto produto = obterProduto(carrinhoProdutoRequest);
+
+                CarrinhoShopping carrinhoShopping = carrinhoShoppingOptional.get().adicionarProduto(produto);
 
                 carrinhoShopping = repository.save(carrinhoShopping);
 
@@ -45,6 +51,10 @@ public class CarrinhoShoppingService {
 
 
         }
+    }
+
+    private Produto obterProduto(CarrinhoProdutoRequest carrinhoProdutoRequest) {
+        return produtoRepository.findById(carrinhoProdutoRequest.getIdProduto()).orElseThrow(() -> new RuntimeException("Error ao buscar produto"));
     }
 
 }

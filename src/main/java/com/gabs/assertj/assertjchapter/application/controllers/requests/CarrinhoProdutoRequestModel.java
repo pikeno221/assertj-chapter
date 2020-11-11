@@ -1,7 +1,6 @@
 package com.gabs.assertj.assertjchapter.application.controllers.requests;
 
 
-import com.gabs.assertj.assertjchapter.domain.produto.Produto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,9 +16,6 @@ public class CarrinhoProdutoRequestModel {
 
     @NotNull
     private Long idProduto;
-
-    @NotNull
-    private Integer quantidade;
 
 
 }

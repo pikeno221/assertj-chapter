@@ -7,8 +7,11 @@ import com.gabs.assertj.assertjchapter.domain.CarrinhoShoppingMapper;
 import com.gabs.assertj.assertjchapter.domain.carrinho.CarrinhoProdutoRequest;
 import com.gabs.assertj.assertjchapter.domain.carrinho.CarrinhoShopping;
 import com.gabs.assertj.assertjchapter.domain.carrinho.CarrinhoShoppingResponse;
+import com.gabs.assertj.assertjchapter.domain.produto.ProdutoResponse;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class CarrinhoShoppingConverter {
@@ -29,7 +32,9 @@ public class CarrinhoShoppingConverter {
 
     public CarrinhoShoppingResponse toCarrinhoShoppingResponse(CarrinhoShopping carrinhoShopping) {
 
-        return mapper.fromCarrinhoShoppingToCarrinhoShoppingResponse(carrinhoShopping);
+        List<ProdutoResponse> produtosResponse = mapper.fromProdutosToProdutosResponse(carrinhoShopping.getProdutos());
+
+        return CarrinhoShoppingResponse.builder().produtos(produtosResponse).valor(carrinhoShopping.getValor()).build();
 
     }
 
