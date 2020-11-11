@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class CarrinhoShoppingConverter {
 
 
-    private CarrinhoShoppingMapper mapper = Mappers.getMapper(CarrinhoShoppingMapper.class);
+    private final CarrinhoShoppingMapper mapper = Mappers.getMapper(CarrinhoShoppingMapper.class);
 
 
     public CarrinhoProdutoRequest toProdutoRequest(CarrinhoProdutoRequestModel carrinhoProdutoRequestModel, Long idCarrinho) {

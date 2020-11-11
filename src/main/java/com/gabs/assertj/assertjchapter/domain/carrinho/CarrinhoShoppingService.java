@@ -1,12 +1,10 @@
-package com.gabs.assertj.assertjchapter.services;
+package com.gabs.assertj.assertjchapter.domain.carrinho;
 
 import com.gabs.assertj.assertjchapter.application.controllers.converters.CarrinhoShoppingConverter;
-import com.gabs.assertj.assertjchapter.domain.carrinho.CarrinhoProdutoRequest;
-import com.gabs.assertj.assertjchapter.domain.carrinho.CarrinhoShopping;
-import com.gabs.assertj.assertjchapter.application.controllers.responses.CarrinhoShoppingResponseModel;
-import com.gabs.assertj.assertjchapter.domain.carrinho.CarrinhoShoppingResponse;
+import com.gabs.assertj.assertjchapter.domain.CarrinhoShoppingMapper;
 import com.gabs.assertj.assertjchapter.infrastructure.repositories.CarrinhoShoppingRepository;
 import lombok.AllArgsConstructor;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,10 +17,10 @@ public class CarrinhoShoppingService {
 
     private final CarrinhoShoppingRepository repository;
 
+    private final CarrinhoShoppingMapper mapper = Mappers.getMapper(CarrinhoShoppingMapper.class);
+
 
     public CarrinhoShoppingResponse adicionarProduto(CarrinhoProdutoRequest carrinhoProdutoRequest) {
-        // cache
-        // noSQL db
 
         try {
 
@@ -30,7 +28,7 @@ public class CarrinhoShoppingService {
 
             if (carrinhoShoppingOptional.isPresent()) {
 
-                CarrinhoShopping carrinhoShopping = carrinhoShoppingOptional.get().adicionarProduto(carrinhoProdutoRequest);
+                CarrinhoShopping carrinhoShopping = carrinhoShoppingOptional.get().adicionarProduto(mapper.fromCarrinhoProdutoRequestToProduto(carrinhoProdutoRequest));
 
                 carrinhoShopping = repository.save(carrinhoShopping);
 

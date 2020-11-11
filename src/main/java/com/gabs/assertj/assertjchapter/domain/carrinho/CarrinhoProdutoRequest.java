@@ -1,14 +1,16 @@
 package com.gabs.assertj.assertjchapter.domain.carrinho;
 
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class CarrinhoProdutoRequest {
 
     private Long idCarrinho;
 
-    private Integer idProduto;
+    private Long idProduto;
 
     private Integer quantidade;
 

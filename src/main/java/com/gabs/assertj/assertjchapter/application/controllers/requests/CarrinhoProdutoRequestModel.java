@@ -2,13 +2,23 @@ package com.gabs.assertj.assertjchapter.application.controllers.requests;
 
 
 import com.gabs.assertj.assertjchapter.domain.produto.Produto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CarrinhoProdutoRequestModel {
 
-    private Integer idProduto;
+    @NotNull
+    private Long idProduto;
 
-    private String nome;
-
+    @NotNull
     private Integer quantidade;
 
 

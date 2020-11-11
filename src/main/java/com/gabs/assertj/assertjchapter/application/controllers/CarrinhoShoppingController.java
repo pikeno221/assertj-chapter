@@ -6,19 +6,17 @@ import com.gabs.assertj.assertjchapter.application.controllers.requests.Carrinho
 import com.gabs.assertj.assertjchapter.application.controllers.responses.CarrinhoShoppingResponseModel;
 import com.gabs.assertj.assertjchapter.domain.carrinho.CarrinhoProdutoRequest;
 import com.gabs.assertj.assertjchapter.domain.carrinho.CarrinhoShoppingResponse;
-import com.gabs.assertj.assertjchapter.services.CarrinhoShoppingService;
+import com.gabs.assertj.assertjchapter.domain.carrinho.CarrinhoShoppingService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
 
-@RestController(value = "/shoppings/carrinhos")
+@RestController
+@RequestMapping("/shoppings/carrinhos")
 @AllArgsConstructor
 public class CarrinhoShoppingController {
 
@@ -28,7 +26,7 @@ public class CarrinhoShoppingController {
 
 
 
-    @PostMapping(value = "/produtos")
+    @PostMapping("{idCarrinho}/produtos")
     public ResponseEntity<CarrinhoShoppingResponseModel> adicionarProduto(@Valid @RequestBody CarrinhoProdutoRequestModel carrinhoProdutoRequestModel, @PathVariable Long idCarrinho) {
 
         CarrinhoProdutoRequest carrinhoProdutoRequest = converter.toProdutoRequest(carrinhoProdutoRequestModel, idCarrinho);
