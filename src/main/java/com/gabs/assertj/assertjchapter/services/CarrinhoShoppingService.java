@@ -20,13 +20,13 @@ public class CarrinhoShoppingService {
     private final CarrinhoShoppingRepository repository;
 
 
-    public CarrinhoShoppingResponse adicionarProduto(CarrinhoProdutoRequest carrinhoProdutoRequest, Long idCarrinho) {
+    public CarrinhoShoppingResponse adicionarProduto(CarrinhoProdutoRequest carrinhoProdutoRequest) {
         // cache
         // noSQL db
 
         try {
 
-            Optional<CarrinhoShopping> carrinhoShoppingOptional = repository.findById(idCarrinho);
+            Optional<CarrinhoShopping> carrinhoShoppingOptional = repository.findById(carrinhoProdutoRequest.getIdCarrinho());
 
             if (carrinhoShoppingOptional.isPresent()) {
 
